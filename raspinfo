@@ -1,0 +1,94 @@
+#!/bin/bash
+
+OUT=raspinfo.txt
+
+rm $OUT
+
+exec > >(tee -ia $OUT)
+
+echo System Information 
+echo ------------------
+echo
+
+cat /sys/firmware/devicetree/base/model
+echo
+
+cat /etc/os-release | head -4
+echo
+
+cat /etc/rpi-issue
+echo
+uname -a
+
+cat /proc/cpuinfo | tail -3 |
+
+echo "Throttled flag  : "`vcgencmd get_throttled`
+echo "Camera          : "`vcgencmd get_camera`
+
+echo
+echo "Videocore information"
+echo "---------------------"
+echo
+
+vcgencmd version
+echo
+vcgencmd mem_reloc_stats
+
+echo
+echo "Filesystem information"
+echo "----------------------"
+
+df
+echo
+cat /proc/swaps
+
+echo
+echo "Networking Information"
+echo "----------------------"
+echo
+
+ifconfig
+dmesg | grep brcmfmac
+dmesg | grep lan78
+dmesg | grep smsc95
+
+
+echo
+echo "USB Information"
+echo "---------------"
+echo
+
+lsusb -t
+
+cat /sys/firmware/devicetree/base/
+
+
+echo
+echo "config.txt"
+echo "----------"
+echo
+
+cat /boot/config.txt
+
+echo
+echo "cmdline.txt"
+echo "-----------"
+
+cat /boot/cmdline.txt
+
+echo
+echo "raspi-gpio settings"
+echo "-------------------"
+echo
+
+raspi-gpio get
+
+echo
+echo "vcdbg log messages"
+echo "------------------"
+echo
+
+sudo vcdbg log msg 2>&1
+
+
+
