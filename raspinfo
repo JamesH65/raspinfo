@@ -20,7 +20,7 @@ cat /etc/rpi-issue
 echo
 uname -a
 
-cat /proc/cpuinfo | tail -3 |
+cat /proc/cpuinfo | tail -3
 
 echo "Throttled flag  : "`vcgencmd get_throttled`
 echo "Camera          : "`vcgencmd get_camera`
