@@ -60,9 +60,6 @@ echo
 
 lsusb -t
 
-cat /sys/firmware/devicetree/base/
-
-
 echo
 echo "config.txt"
 echo "----------"
