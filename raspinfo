@@ -43,6 +43,17 @@ echo
 cat /proc/swaps
 
 echo
+echo "Package version information"
+echo "---------------------------"
+
+apt-cache policy raspberrypi-ui-mods | head -2
+apt-cache policy raspberrypi-sys-mods | head -2
+apt-cache policy openbox | head -2
+apt-cache policy lxpanel | head -2
+apt-cache policy pcmanfm | head -2
+apt-cache policy rpd-plym-splash | head -2
+
+echo
 echo "Networking Information"
 echo "----------------------"
 echo
@@ -65,7 +76,7 @@ echo "config.txt"
 echo "----------"
 echo
 
-cat /boot/config.txt
+cat /boot/config.txt | egrep -v "^\s*(#|^$)"
 
 echo
 echo "cmdline.txt"
